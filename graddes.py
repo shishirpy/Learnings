@@ -5,6 +5,12 @@ Created on Wed Jul 24 01:07:21 2013
 @author: shishir
 @email: shishir.py@gmail.com
 @filename: graddes.py
+
+This program is a demonstration of linear regression 
+with optimization done by gradient descent algorithm.
+
+The program shows the contours of cost function and the 
+path taken by the optimization.
 """
 
 import numpy as np
@@ -12,9 +18,10 @@ import pdb
 import matplotlib.pyplot as plt
 
 m = 100
-alpha = 0.13
+alpha = 0.08
 iters = 10000
-np.random.seed(0)
+#np.random.seed(0)
+centered = False
 
 x = 10 * np.random.rand(m)
 x1 = np.ones(m)
@@ -22,7 +29,7 @@ x1 = np.ones(m)
 X = np.vstack((x1, x))
 X = X.T
 
-beta = [[5],[3]]
+beta = [[5],[3]]  #fix the function that generates the data
 
 Y = np.dot(X,beta) + 0.2 * np.random.rand(m,1)
 
@@ -56,7 +63,10 @@ Z = np.sum(tmp, axis = 0)
 print Z.shape
 
 #contor levels
-v = np.logspace(-3, 10, num = 50, base = 2)
+v1 = np.linspace(0.0004, 10, num = 10)
+v2 = np.logspace(-3, 4, num = 5, base = 2)
+v = np.concatenate((v1,v2))
+
 
 plt.figure()
 CS = plt.contour(XX,YY,Z,v)
